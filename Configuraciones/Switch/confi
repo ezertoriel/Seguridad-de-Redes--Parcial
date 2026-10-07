@@ -33,6 +33,12 @@ exit
 interface vlan 10
 no shutdown
 exit
+vlan 40
+name Sucursal
+exit
+interface vlan 40
+no shutdown
+exit
 interface gig0/0
 switchport trunk encapsulation dot1q
 switchport mode trunk
@@ -64,7 +70,7 @@ spanning-tree bpduguard enable
 no shutdown
 exit
 
-interface range gig1/0-2
+interface range gig1/1-2
 switchport mode access
 switchport access vlan 30
 switchport port-security
