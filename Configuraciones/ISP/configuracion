@@ -1,6 +1,8 @@
 enable
 configure terminal
 hostname ISP
+ip name-server 8.8.8.8
+no ip domain-lookup
 interface e1/1
 ip address dhcp
 ip nat outside
@@ -11,7 +13,18 @@ ip address 200.8.63.1 255.255.255.252
 ip nat inside
 no shutdown
 exit
+
+interface e1/2
+ip address 200.8.63.5 255.255.255.252
+ip nat inside
+no shutdown
+exit
+
 access-list 1 permit any
 ip nat inside source list 1 interface e1/1 overload
+
+ip nat inside source static tcp 200.8.63.2 80 interface e1/1 8443
+ip nat inside source static tcp 200.8.63.2 443 interface e1/1 8443
+
 exit
 copy running-config startup-config
