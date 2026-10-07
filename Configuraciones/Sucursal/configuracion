@@ -1,0 +1,17 @@
+enable
+configure terminal
+hostname Sucursal
+interface e1/0
+ip address 200.8.63.7 255.255.255.252
+no shutdown
+exit
+
+interface fa0/0
+ip address 10.8.64.17 255.255.255.240
+no shutdown
+exit
+
+ip route 0.0.0.0 0.0.0.0 e1/0
+exit
+write
+copy running-config startup-config
